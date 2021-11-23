@@ -1,18 +1,27 @@
 version: "3.4"
 services:
   mongo:
-    image: mongo:4.4
+    image: mongo:3.6.6-jessie
     ports:
       - '27017:27017'
     volumes:
-      - './.docker/compose/data/mongo/db:/data/db'
-      - './.docker/compose/data/mongo/restore:/data/restore:ro'
+      - './.docker/compose/mongo/db:/data/db'
+      - './.docker/compose/mongo/restore:/data/restore:ro'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=auth
+      - MONGO_INITDB_ROOT_PASSWORD=dev-pipedrive
 
   mongo-express:
     image: mongo-express
     restart: always
+    depends_on:
+      - mongo
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=dev-pipedrive
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin

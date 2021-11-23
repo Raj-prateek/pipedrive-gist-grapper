@@ -1,30 +1,22 @@
-# loopback4-boilerplate-mongo
+# pipedrive-gist-grapper
 
-This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
-[initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
+Using the Github API query a user’s publicly available GitHub gists and create a deal/activity in Pipedrive for each gist. Implemented a cron job that periodically checks for a user's publicly available gists, this application also has a web endpoint which provide the gists for that user that were added since the last visit.
 
-## Install dependencies
+## Initialise development environment
 
-By default, dependencies were installed when this application was generated.
-Whenever dependencies in `package.json` are changed, run the following command:
+Run command:
 
 ```sh
-npm install
+make init-dev
 ```
 
-To only install resolved dependencies in `package-lock.json`:
-
-```sh
-npm ci
-```
+Above command will install the dependencies, build & run the needful containers for you.
 
 ## Run the application
 
 ```sh
 npm start
 ```
-
-You can also run `node .` to skip the build step.
 
 Open http://127.0.0.1:3000 in your browser.
 

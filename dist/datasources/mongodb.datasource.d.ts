@@ -6,11 +6,11 @@ export declare class MongodbDataSource extends juggler.DataSource implements Lif
         name: string;
         connector: string;
         url: string;
+        database: string;
         host: string;
         port: number;
         user: string;
         password: string;
-        database: string;
         useNewUrlParser: boolean;
     };
     constructor(dsConfig?: object);

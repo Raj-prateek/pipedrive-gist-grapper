@@ -3,8 +3,9 @@ name: Node.js CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       matrix:
         node-version: [14.x]
@@ -14,5 +15,6 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    # - run: npm test
+    - name: Install package
+      run: npm ci
+    - run: npm test

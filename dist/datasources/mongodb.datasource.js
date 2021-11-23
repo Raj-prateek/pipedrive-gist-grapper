@@ -4,17 +4,7 @@ exports.MongodbDataSource = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("@loopback/core");
 const repository_1 = require("@loopback/repository");
-const config = {
-    name: 'mongodb',
-    connector: 'mongodb',
-    url: 'mongodb://root:root@localhost:27017/central_db',
-    host: 'localhost',
-    port: 27017,
-    user: 'root',
-    password: 'root',
-    database: 'central_db',
-    useNewUrlParser: true
-};
+const config = tslib_1.__importStar(require("./mongodb.datasource.json"));
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.

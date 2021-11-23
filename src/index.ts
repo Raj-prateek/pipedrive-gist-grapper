@@ -1,5 +1,4 @@
 import {ApplicationConfig, BoilerPlateApplication} from './application';
-
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {

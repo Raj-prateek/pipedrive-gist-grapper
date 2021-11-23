@@ -1,0 +1,11 @@
+{
+    "name": "mongodb",
+    "connector": "mongodb",
+    "url": "mongodb://admin:dev-p@localhost:27017",
+    "database": "gist_grapper",
+    "host": "localhost",
+    "port": 27017,
+    "user": "admin",
+    "password": "dev-pipedrive",
+    "useNewUrlParser": true
+}

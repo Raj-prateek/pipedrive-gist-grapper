@@ -1,10 +1,10 @@
-import {BoilerPlateApplication} from './application';
+import {GistGrapperApplication} from './application';
 
 export async function migrate(args: string[]) {
   const existingSchema = args.includes('--rebuild') ? 'drop' : 'alter';
   console.log('Migrating schemas (%s existing schema)', existingSchema);
 
-  const app = new BoilerPlateApplication();
+  const app = new GistGrapperApplication();
   await app.boot();
   await app.migrateSchema({existingSchema});
 

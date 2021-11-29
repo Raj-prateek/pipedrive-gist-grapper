@@ -1,5 +1,5 @@
 import {ApplicationConfig} from '@loopback/core';
-import {BoilerPlateApplication} from './application';
+import {GistGrapperApplication} from '.';
 
 /**
  * Export the OpenAPI spec from the application
@@ -12,7 +12,7 @@ async function exportOpenApiSpec(): Promise<void> {
     },
   };
   const outFile = process.argv[2] ?? '';
-  const app = new BoilerPlateApplication(config);
+  const app = new GistGrapperApplication(config);
   await app.boot();
   await app.exportOpenApiSpec(outFile);
 }

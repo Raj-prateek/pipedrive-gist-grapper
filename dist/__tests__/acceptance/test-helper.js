@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setupApplication = void 0;
-const __1 = require("../..");
 const testlab_1 = require("@loopback/testlab");
+const __1 = require("../..");
 async function setupApplication() {
     const restConfig = testlab_1.givenHttpServerConfig({
     // Customize the server configuration here.
@@ -11,7 +11,7 @@ async function setupApplication() {
     // host: process.env.HOST,
     // port: +process.env.PORT,
     });
-    const app = new __1.BoilerPlateApplication({
+    const app = new __1.GistGrapperApplication({
         rest: restConfig,
     });
     await app.boot();

@@ -1,3 +1,3 @@
-import { ApplicationConfig, BoilerPlateApplication } from './application';
+import { ApplicationConfig, GistGrapperApplication } from './application';
 export * from './application';
-export declare function main(options?: ApplicationConfig): Promise<BoilerPlateApplication>;
+export declare function main(options?: ApplicationConfig): Promise<GistGrapperApplication>;

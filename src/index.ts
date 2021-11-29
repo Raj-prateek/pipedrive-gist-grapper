@@ -1,8 +1,8 @@
-import {ApplicationConfig, BoilerPlateApplication} from './application';
+import {ApplicationConfig, GistGrapperApplication} from './application';
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
-  const app = new BoilerPlateApplication(options);
+  const app = new GistGrapperApplication(options);
   await app.boot();
   await app.start();
 

@@ -1,7 +1,7 @@
 import { ApplicationConfig } from '@loopback/core';
 import { RestApplication } from '@loopback/rest';
 export { ApplicationConfig };
-declare const BoilerPlateApplication_base: (new (...args: any[]) => {
+declare const GistGrapperApplication_base: (new (...args: any[]) => {
     projectRoot: string;
     bootOptions?: import("@loopback/boot").BootOptions | undefined;
     booted: boolean;
@@ -267,6 +267,6 @@ declare const BoilerPlateApplication_base: (new (...args: any[]) => {
     prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     eventNames: () => (string | symbol)[];
 }) & typeof RestApplication;
-export declare class BoilerPlateApplication extends BoilerPlateApplication_base {
+export declare class GistGrapperApplication extends GistGrapperApplication_base {
     constructor(options?: ApplicationConfig);
 }

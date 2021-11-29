@@ -1,6 +1,6 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
-import * as config from './mongodb.datasource.json';
+import * as config from './mongodb.datasource.config.json';
 
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down
@@ -15,7 +15,7 @@ export class MongodbDataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.mongodb', {optional: true})
+    @inject('mongodb.datasources.config', {optional: true})
     dsConfig: object = config,
   ) {
     super(dsConfig);

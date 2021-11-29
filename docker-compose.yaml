@@ -2,6 +2,7 @@ version: "3.4"
 services:
   mongo:
     image: mongo:3.6.6-jessie
+    container_name: 'pd-mongo'
     ports:
       - '27017:27017'
     volumes:
@@ -9,11 +10,11 @@ services:
       - './.docker/compose/mongo/restore:/data/restore:ro'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_DATABASE=auth
       - MONGO_INITDB_ROOT_PASSWORD=dev-pipedrive
 
   mongo-express:
     image: mongo-express
+    container_name: 'pd-mongo-express'
     restart: always
     depends_on:
       - mongo
@@ -25,3 +26,13 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_BASICAUTH_USERNAME=admin
       - ME_CONFIG_BASICAUTH_PASSWORD=admin
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'pd-rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - './.docker/compose/data/rabbitmq/data/:/var/lib/rabbitmq/'
+      - './.docker/compose/data/rabbitmq/log/:/var/log/rabbitmq'

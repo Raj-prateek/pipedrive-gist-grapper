@@ -1,7 +1,7 @@
 {
     "name": "mongodb",
     "connector": "mongodb",
-    "url": "mongodb://admin:dev-p@localhost:27017",
+    "url": "mongodb://admin:dev-pipedrive@localhost:27017/gist_grapper?authSource=admin",
     "database": "gist_grapper",
     "host": "localhost",
     "port": 27017,

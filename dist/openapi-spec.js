@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const application_1 = require("./application");
+const _1 = require(".");
 /**
  * Export the OpenAPI spec from the application
  */
@@ -13,7 +13,7 @@ async function exportOpenApiSpec() {
         },
     };
     const outFile = (_c = process.argv[2]) !== null && _c !== void 0 ? _c : '';
-    const app = new application_1.BoilerPlateApplication(config);
+    const app = new _1.GistGrapperApplication(config);
     await app.boot();
     await app.exportOpenApiSpec(outFile);
 }

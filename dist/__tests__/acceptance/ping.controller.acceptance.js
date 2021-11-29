@@ -1,19 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const testlab_1 = require("@loopback/testlab");
-const test_helper_1 = require("./test-helper");
-describe('PingController', () => {
-    let app;
-    let client;
-    before('setupApplication', async () => {
-        ({ app, client } = await test_helper_1.setupApplication());
-    });
-    after(async () => {
-        await app.stop();
-    });
-    it('invokes GET /ping', async () => {
-        const res = await client.get('/ping?msg=world').expect(200);
-        testlab_1.expect(res.body).to.containEql({ greeting: 'Hello from LoopBack' });
-    });
-});
+// import {Client, expect} from '@loopback/testlab';
+// import {GistGrapperApplication} from '../..';
+// import {setupApplication} from './test-helper';
+// describe('PingController', () => {
+//   let app: GistGrapperApplication;
+//   let client: Client;
+//   before('setupApplication', async () => {
+//     ({app, client} = await setupApplication());
+//   });
+//   after(async () => {
+//     await app.stop();
+//   });
+//   it('invokes GET /ping', async () => {
+//     const res = await client.get('/ping?msg=world').expect(200);
+//     expect(res.body).to.containEql({greeting: 'Hello from LoopBack'});
+//   });
+// });
 //# sourceMappingURL=ping.controller.acceptance.js.map

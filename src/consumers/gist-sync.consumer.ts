@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import {service} from '@loopback/core';
+import {repository} from '@loopback/repository';
 import {Octokit} from '@octokit/core';
 import {rabbitConsume} from 'loopback-rabbitmq';
 import {PipedriveProducer} from '../producers';
 import {FetchGistMessage, GistProducer} from '../producers/gist.producer';
+import {UsersRepository} from '../repositories';
 
 interface ResponseGist {
   id: string;
@@ -19,6 +21,8 @@ export class GistSyncConsumer {
     private pipedriveProducer: PipedriveProducer,
     @service(GistProducer)
     private gistProducer: GistProducer,
+    @repository(UsersRepository)
+    public usersRepository: UsersRepository,
   ) {}
 
   @rabbitConsume({
@@ -52,6 +56,10 @@ export class GistSyncConsumer {
       });
       if (data.length === this.PER_PAGE_LIMIT) {
         await this.gistProducer.fetchGist({...message, page: message.page + 1});
+      } else {
+        await this.usersRepository.updateById(message.userId, {
+          lastSyncedAt: new Date().toString(),
+        });
       }
     } catch (e) {
       console.error(e);

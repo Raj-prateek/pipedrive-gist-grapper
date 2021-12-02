@@ -1,12 +1,5 @@
 <div id="top"></div>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-
-<!-- PROJECT LOGO -->
-<br />
 <div align="center">
 <h3 align="center">Pipedrive Gist Grapper</h3>
 
@@ -16,9 +9,6 @@
     <a href="https://github.com/prateek-raj/pipedrive-gist-grapper/issues">Report Bug</a>
   </p>
 </div>
-
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>

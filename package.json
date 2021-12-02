@@ -47,6 +47,7 @@
   "dependencies": {
     "@loopback/boot": "^3.4.0",
     "@loopback/core": "^2.16.0",
+    "@loopback/cron": "^0.7.0",
     "@loopback/repository": "^3.6.0",
     "@loopback/rest": "^9.3.0",
     "@loopback/rest-explorer": "^3.3.0",
@@ -55,16 +56,16 @@
     "env-cmd": "^10.1.0",
     "loopback-connector-mongodb": "^5.5.0",
     "loopback-rabbitmq": "^1.1.6-0",
-    "pipedrive": "^13.0.2",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@loopback/build": "^6.4.0",
-    "source-map-support": "^0.5.19",
+    "@loopback/eslint-config": "^10.2.0",
     "@loopback/testlab": "^3.4.0",
     "@types/node": "^10.17.59",
-    "@loopback/eslint-config": "^10.2.0",
     "eslint": "^7.25.0",
+    "pipedrive": "^13.0.2",
+    "source-map-support": "^0.5.19",
     "typescript": "~4.2.4"
   }
 }

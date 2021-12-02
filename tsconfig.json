@@ -4,7 +4,9 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "module": "commonjs",
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src"

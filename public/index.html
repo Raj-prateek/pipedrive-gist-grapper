@@ -2,20 +2,19 @@
 <html lang="en">
 
 <head>
-  <title>boiler-plate</title>
+  <title>Gists Grapper</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="https://loopback.io/favicon.ico">
-
   <style>
     h3 {
       margin-left: 25px;
       text-align: center;
     }
 
-    a, a:visited {
+    a,
+    a:visited {
       color: #3f5dff;
     }
 
@@ -23,7 +22,9 @@
       margin-left: 10px;
     }
 
-    a:hover, a:focus, a:active {
+    a:hover,
+    a:focus,
+    a:active {
       color: #001956;
     }
 
@@ -34,35 +35,22 @@
       transform: translateX(-50%);
     }
 
-    .info {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%)
-    }
 
-    .info h1 {
-      text-align: center;
-      margin-bottom: 0;
-    }
-
-    .info p {
-      text-align: center;
-      margin-bottom: 3em;
-      margin-top: 1em;
-    }
 
     @media (prefers-color-scheme: dark) {
       body {
-        background-color: rgb(29, 30, 32);
-        color: white;
+        background-color: #efefef;
+        color: #333;
       }
 
-      a, a:visited {
+      a,
+      a:visited {
         color: #4990e2;
       }
 
-      a:hover, a:focus, a:active {
+      a:hover,
+      a:focus,
+      a:active {
         color: #2b78ff;
       }
     }
@@ -71,18 +59,76 @@
 
 <body>
   <div class="info">
-    <h1>boiler-plate</h1>
-    <p>Version 1.0.0</p>
+    <h1>Users</h1>
+    <input type="text" id="userName" /> <button type="button" onclick="addUser()">Add</button>
+    <table>
+      <tr>
+        <th>Username</th>
+        <th>Last Sync at</th>
+        <th></th>
+      </tr>
+      <tbody id="users-table">
 
-    <h3>OpenAPI spec: <a href="/openapi.json">/openapi.json</a></h3>
-    <h3>API Explorer: <a href="/explorer">/explorer</a></h3>
+      </tbody>
+
+    </table>
+
+
   </div>
+  <script>
+    function sendGETRequest(path, callback) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = callback;
+      xhttp.open("GET", path, true);
+      xhttp.send();
+    }
 
-  <footer class="power">
-    <a href="https://loopback.io" target="_blank">
-      <img src="https://loopback.io/images/branding/powered-by-loopback/blue/powered-by-loopback-sm.png" />
-    </a>
-  </footer>
+    function sendPOSTRequest(path, data, callback) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", path, true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.onreadystatechange = callback;
+      xhttp.send(JSON.stringify(data));
+    }
+
+    function showUsers() {
+      if (this.readyState == 4 && this.status == 200) {
+        const users = JSON.parse(this.responseText);
+        let html = '';
+        users.forEach(user => {
+          html += `<tr>
+            <td><a href="/detail.html?id=${user.id}">${user.userName}</a></td>
+            <td>${user.lastSyncedAt}</td>
+            <td><button type="button" onclick="startSync('${user.id}');">Sync</button></td>
+            </tr>`
+        });
+        document.getElementById("users-table").innerHTML = html;
+      }
+    }
+
+    function addUser() {
+      sendPOSTRequest('/users', { userName: document.getElementById("userName").value }, () => {
+        sendGETRequest('/users', showUsers);
+      });
+    }
+
+    function startSync(userID) {
+      const self = this;
+      self.disabled = true;
+      sendGETRequest(`/users/${userID}/start-sync`, () => {
+        self.disabled = false;
+      });
+    }
+
+    const filter = {
+      order: [
+        "lastSyncedAt desc"
+      ]
+    }
+
+    sendGETRequest('/users?filter=' + JSON.stringify(filter), showUsers);
+
+  </script>
 </body>
 
 </html>

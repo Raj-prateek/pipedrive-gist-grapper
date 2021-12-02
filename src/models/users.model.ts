@@ -18,7 +18,7 @@ export class Users extends Entity {
     id: true,
     generated: true,
   })
-  id?: string;
+  id: string;
 
   @property({
     type: 'date',

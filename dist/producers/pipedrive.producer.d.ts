@@ -4,9 +4,10 @@ interface Gist {
     htmlURL: string;
     description: string;
 }
-interface GistMessage {
+export interface GistMessage {
     gist: Gist;
     dealID: number;
+    userID: string;
 }
 export declare class PipedriveProducer {
     private rabbitmqProducer;

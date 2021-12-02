@@ -19,8 +19,6 @@ export class CronService extends CronJob {
           order: ['lastSyncAt asc'],
         });
         for (const user in users) {
-          users[user].lastSyncedAt = new Date().toString();
-          await this.usersRepository.save(users[user]);
           await this.gistProducer.fetchGist({
             userName: users[user].userName,
             date: new Date(),

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Gists Grapper</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    h3 {
+      margin-left: 25px;
+      text-align: center;
+    }
+
+    a,
+    a:visited {
+      color: #3f5dff;
+    }
+
+    h3 a {
+      margin-left: 10px;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+      color: #001956;
+    }
+
+    .power {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #efefef;
+        color: #333;
+      }
+
+      a,
+      a:visited {
+        color: #4990e2;
+      }
+
+      a:hover,
+      a:focus,
+      a:active {
+        color: #2b78ff;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="info">
+    <h1>Gists List</h1>
+    <div id="show-alert"></div>
+    <table>
+      <tr>
+        <th>S no</th>
+        <th>Url</th>
+        <th>Description</th>
+        <th>Created</th>
+      </tr>
+      <tbody id="gists-table">
+
+      </tbody>
+
+    </table>
+
+
+  </div>
+  <script>
+
+    function findGetParameter(parameterName) {
+      var result = null,
+        tmp = [];
+      location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+      return result;
+    }
+    function sendGETRequest(path, callback) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = callback;
+      xhttp.open("GET", path, true);
+      xhttp.send();
+    }
+
+    function showUsersGists() {
+      if (this.readyState == 4 && this.status == 200) {
+        const gists = JSON.parse(this.responseText);
+        let html = '';
+        gists.forEach((gist, index) => {
+          html += `<tr>
+            <td>${index + 1}</td>
+            <td><a href="${gist.htmlURL}" target="_blank">${gist.htmlURL}</a></td>
+            <td>${gist.description}</td>
+            <td>${gist.created}</td>
+          </tr>`;
+        });
+        document.getElementById("gists-table").innerHTML = html;
+      }
+    }
+
+    function main() {
+      const id = findGetParameter('id');
+      if (id === undefined || id === '' || id === null) {
+        document.getElementById("show-alert").innerHTML = `<span style="color:red;">Invalid user id</span>`;
+        return;
+      }
+      const filter = {
+        where: {
+          userId: id,
+        },
+        order: [
+          "created desc"
+        ]
+      }
+      sendGETRequest('/gists-logs?filter=' + JSON.stringify(filter), showUsersGists);
+
+    }
+    main();
+  </script>
+</body>
+
+</html>

@@ -40,7 +40,7 @@ Users = tslib_1.__decorate([
         settings: {
             strict: false,
             mongodb: { schema: 'gist_grapper' }, // custom names
-        }
+        },
     }),
     tslib_1.__metadata("design:paramtypes", [Object])
 ], Users);

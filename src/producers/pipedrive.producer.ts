@@ -7,9 +7,10 @@ interface Gist {
   description: string;
 }
 
-interface GistMessage {
+export interface GistMessage {
   gist: Gist;
   dealID: number;
+  userID: string;
 }
 
 export class PipedriveProducer {

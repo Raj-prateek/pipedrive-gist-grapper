@@ -1,5 +1,6 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
+import {CronComponent} from '@loopback/cron';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
@@ -19,6 +20,7 @@ import path from 'path';
 import {CustomComponent} from './custom-components';
 import {MongodbDataSource} from './datasources';
 import {MySequence} from './sequence';
+import {CronService} from './services';
 
 export {ApplicationConfig};
 
@@ -81,7 +83,6 @@ export class GistGrapperApplication extends BootMixin(
             {
               routingKey: process.env.RABBITMQ_QUEUE ?? '',
               queue: process.env.RABBITMQ_QUEUE,
-              allowNonJsonMessages: true,
             },
           ],
         },
@@ -92,7 +93,6 @@ export class GistGrapperApplication extends BootMixin(
             {
               routingKey: process.env.RABBITMQ_QUEUE_PIPEDRIVE ?? '',
               queue: process.env.RABBITMQ_QUEUE_PIPEDRIVE,
-              allowNonJsonMessages: true,
             },
           ],
         },
@@ -103,15 +103,13 @@ export class GistGrapperApplication extends BootMixin(
     this.booters(ConsumersBooter);
     this.component(QueueComponent);
     this.component(CustomComponent);
+    this.component(CronComponent);
+    const jobBinding = createBindingFromClass(CronService);
+    this.add(jobBinding);
 
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
-      consumers: {
-        dirs: ['consumers'],
-        extensions: ['.consumer.js'],
-        nested: true,
-      },
       controllers: {
         // Customize ControllerBooter Conventions here
         dirs: ['controllers'],

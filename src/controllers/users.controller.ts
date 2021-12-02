@@ -11,6 +11,7 @@ import {
 import {Users} from '../models';
 import {GistProducer} from '../producers/gist.producer';
 import {UsersRepository} from '../repositories';
+import {PipedriveService} from '../services';
 
 export class UsersController {
   constructor(
@@ -18,6 +19,8 @@ export class UsersController {
     private gistProducer: GistProducer,
     @repository(UsersRepository)
     public usersRepository: UsersRepository,
+    @service(PipedriveService)
+    private pipedriveService: PipedriveService,
   ) {}
 
   @post('/users')
@@ -38,7 +41,8 @@ export class UsersController {
     })
     users: Omit<Users, 'id'>,
   ): Promise<Users> {
-    return this.usersRepository.create(users);
+    const dealId = await this.pipedriveService.addDeal(users.userName);
+    return this.usersRepository.create({...users, dealId});
   }
 
   @get('/users')
@@ -80,6 +84,8 @@ export class UsersController {
   })
   async startSyncById(@param.path.string('id') id: string) {
     const user = await this.usersRepository.findById(id);
+    user.lastSyncedAt = new Date().toString();
+    await this.usersRepository.save(user);
     await this.gistProducer.fetchGist({
       userName: user.userName,
       date: new Date(),

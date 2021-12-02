@@ -8,13 +8,16 @@ const rest_1 = require("@loopback/rest");
 const models_1 = require("../models");
 const gist_producer_1 = require("../producers/gist.producer");
 const repositories_1 = require("../repositories");
+const services_1 = require("../services");
 let UsersController = class UsersController {
-    constructor(gistProducer, usersRepository) {
+    constructor(gistProducer, usersRepository, pipedriveService) {
         this.gistProducer = gistProducer;
         this.usersRepository = usersRepository;
+        this.pipedriveService = pipedriveService;
     }
     async create(users) {
-        return this.usersRepository.create(users);
+        const dealId = await this.pipedriveService.addDeal(users.userName);
+        return this.usersRepository.create({ ...users, dealId });
     }
     async find(filter) {
         return this.usersRepository.find(filter);
@@ -24,6 +27,8 @@ let UsersController = class UsersController {
     }
     async startSyncById(id) {
         const user = await this.usersRepository.findById(id);
+        user.lastSyncedAt = new Date().toString();
+        await this.usersRepository.save(user);
         await this.gistProducer.fetchGist({
             userName: user.userName,
             date: new Date(),
@@ -32,7 +37,7 @@ let UsersController = class UsersController {
             page: 1,
         });
         return {
-            status: "success"
+            status: 'success',
         };
     }
 };
@@ -103,8 +108,10 @@ tslib_1.__decorate([
 UsersController = tslib_1.__decorate([
     tslib_1.__param(0, core_1.service(gist_producer_1.GistProducer)),
     tslib_1.__param(1, repository_1.repository(repositories_1.UsersRepository)),
+    tslib_1.__param(2, core_1.service(services_1.PipedriveService)),
     tslib_1.__metadata("design:paramtypes", [gist_producer_1.GistProducer,
-        repositories_1.UsersRepository])
+        repositories_1.UsersRepository,
+        services_1.PipedriveService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map

@@ -1,10 +1,11 @@
 import {Component, createServiceBinding} from '@loopback/core';
-import {PipedriveProducer} from './producers';
-import {GistProducer} from './producers/gist.producer';
+import {GistProducer, PipedriveProducer} from './producers';
+import {PipedriveService} from './services';
 
 export class CustomComponent implements Component {
   bindings = [
     createServiceBinding(PipedriveProducer),
     createServiceBinding(GistProducer),
+    createServiceBinding(PipedriveService),
   ];
 }

@@ -1,0 +1,42 @@
+integrations:
+  node_exporter:
+    enabled: true
+  prometheus_remote_write:
+    - basic_auth:
+        password: eyJrIjoiMTJiZjA0MzIwOWQyZDc3YWY4YzM0MmJmOWM1NzA5YjM0YzNjZmVhNSIsIm4iOiJwcmF0ZWVrcmFqMS1lYXN5c3RhcnQtcHJvbS1wdWJsaXNoZXIiLCJpZCI6NTcyOTI3fQ==
+        username: 269734
+      url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
+loki:
+  configs:
+    - clients:
+        - basic_auth:
+            password: eyJrIjoiMTJiZjA0MzIwOWQyZDc3YWY4YzM0MmJmOWM1NzA5YjM0YzNjZmVhNSIsIm4iOiJwcmF0ZWVrcmFqMS1lYXN5c3RhcnQtcHJvbS1wdWJsaXNoZXIiLCJpZCI6NTcyOTI3fQ==
+            username: 133838
+          url: https://logs-prod-us-central1.grafana.net/api/prom/push
+      name: integrations
+      positions:
+        filename: /tmp/positions.yaml
+      target_config:
+        sync_period: 10s
+prometheus:
+  configs:
+    - name: integrations
+      remote_write:
+        - basic_auth:
+            password: eyJrIjoiMTJiZjA0MzIwOWQyZDc3YWY4YzM0MmJmOWM1NzA5YjM0YzNjZmVhNSIsIm4iOiJwcmF0ZWVrcmFqMS1lYXN5c3RhcnQtcHJvbS1wdWJsaXNoZXIiLCJpZCI6NTcyOTI3fQ==
+            username: 269734
+          url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
+      scrape_configs:
+        - job_name: integrations/docker
+          static_configs:
+            - targets:
+                - localhost:8080
+        - job_name: integrations/nodejs
+          static_configs:
+            - targets:
+                - localhost:4001
+  global:
+    scrape_interval: 60s
+  wal_directory: /tmp/grafana-agent-wal
+server:
+  http_listen_port: 12345

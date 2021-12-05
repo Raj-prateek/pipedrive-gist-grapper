@@ -1,6 +1,7 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
 import {CronComponent} from '@loopback/cron';
+import {MetricsBindings, MetricsComponent} from '@loopback/metrics';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
@@ -106,6 +107,21 @@ export class GistGrapperApplication extends BootMixin(
     this.component(CronComponent);
     const jobBinding = createBindingFromClass(CronService);
     this.add(jobBinding);
+
+    this.configure(MetricsBindings.COMPONENT).to({
+      endpoint: {
+        basePath: '/metrics',
+      },
+      defaultMetrics: {
+        timeout: 5000,
+      },
+      defaultLabels: {
+        service: 'api',
+        version: '1.0.0',
+      },
+      openApiSpec: true,
+    });
+    this.component(MetricsComponent);
 
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here

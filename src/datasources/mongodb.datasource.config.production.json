@@ -1,0 +1,6 @@
+{
+  "name": "mongodb",
+  "connector": "mongodb",
+  "url": "mongodb+srv://pipedrive-user:Pipedrive-User-1234@cluster0.q9evk.mongodb.net/gist_grapper?w=majority&retryWrites=true",
+  "useNewUrlParser": true
+}

@@ -23,5 +23,5 @@ test:
 	npm run test
 
 .PHONY: lint
-test:
+lint:
 	npm run lint

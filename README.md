@@ -44,9 +44,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Product](assets/images/consumer-flow.png)
-
 Using the Github API query a user’s publicly available GitHub gists and create a deal/activity in Pipedrive for each gist. Implemented a cron job that periodically checks for a user's publicly available gists, this application also has a web endpoint which provide the gists for that user that were added since the last visit.
+
+![Product](assets/images/consumer-flow.png)
 
 ### Services
 * *Gist-Sync-Consumer* collects the gist from the github using gist api.
@@ -66,6 +66,8 @@ Using the Github API query a user’s publicly available GitHub gists and create
 * AWS ECS, ECR, & CloudWatch
 * Github & Github Action
 * Docker
+* Mongodb
+* CloudAMQP
 
 <!-- GETTING STARTED -->
 ## Getting Started

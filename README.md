@@ -17,7 +17,9 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#services">Services</a></li>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#infra-platforms">Infra Platforms</a></li>
         <li><a href="#flow-diagram">Flow diagram</a></li>
       </ul>
     </li>

@@ -18,7 +18,7 @@ export class MongodbDataSource
   constructor(
     @inject('mongodb.datasources.config', {optional: true})
     dsConfig: object = process.env.NODE_ENV === 'production'
-      ? prodConfig
+      ? {...prodConfig, url: process.env.MONGO_PRODUCTION}
       : config,
   ) {
     super(dsConfig);

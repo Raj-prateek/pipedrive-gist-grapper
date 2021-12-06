@@ -3,7 +3,7 @@ name: Deploy to Amazon ECS
 on:
   workflow_run:
     workflows: ["CI build"]
-    branches: [main]
+    branches: [update-readme]
     types:
       - completed
 
@@ -42,7 +42,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build --build-arg GITHUB_TOKEN=${{ secrets.GIT_ACCESS_TOKEN }} --build-arg PIPEDRIVE_TOKEN=${{ secrets.PIPEDRIVE_ACCESSTOKEN }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --build-arg RABBITMQ_VHOST=${{ secrets.RABBITMQ_VHOST }} --build-arg RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }} --build-arg AMQP_USERNAME=${{ secrets.AMQP_USERNAME }} --build-arg AMQP_PASSWORD=${{ secrets.AMQP_PASSWORD }} --build-arg MONGO_PRODUCTION=${{ secrets.MONGO_PRODUCTION }} --build-arg GITHUB_TOKEN=${{ secrets.GIT_ACCESS_TOKEN }} --build-arg PIPEDRIVE_TOKEN=${{ secrets.PIPEDRIVE_ACCESSTOKEN }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 

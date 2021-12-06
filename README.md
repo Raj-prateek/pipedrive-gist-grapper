@@ -1,3 +1,4 @@
+[![CI build](https://github.com/prateek-raj/pipedrive-gist-grapper/actions/workflows/ci.yml/badge.svg)](https://github.com/prateek-raj/pipedrive-gist-grapper/actions/workflows/ci.yml) [![Deploy to Amazon ECS](https://github.com/prateek-raj/pipedrive-gist-grapper/actions/workflows/cd.yml/badge.svg)](https://github.com/prateek-raj/pipedrive-gist-grapper/actions/workflows/cd.yml)
 <div id="top"></div>
 
 <div align="center">
@@ -16,7 +17,9 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#services">Services</a></li>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#infra-platforms">Infra Platforms</a></li>
         <li><a href="#flow-diagram">Flow diagram</a></li>
       </ul>
     </li>
@@ -59,6 +62,10 @@ Using the Github API query a user’s publicly available GitHub gists and create
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Infra Platforms
+* AWS ECS, ECR, & CloudWatch
+* Github & Github Action
+* Docker
 
 <!-- GETTING STARTED -->
 ## Getting Started

@@ -3,3 +3,4 @@ dist/
 coverage/
 .eslintrc.js
 init-mongodb.js
+.env*

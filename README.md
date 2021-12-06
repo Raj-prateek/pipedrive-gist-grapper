@@ -41,9 +41,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[Product](assets/images/consumer-flow.png)
 
 Using the Github API query a user’s publicly available GitHub gists and create a deal/activity in Pipedrive for each gist. Implemented a cron job that periodically checks for a user's publicly available gists, this application also has a web endpoint which provide the gists for that user that were added since the last visit.
+
+### Services
+* *Gist-Sync-Consumer* collects the gist from the github using gist api.
+* *Pipedrive-Consumer* save it's logs in db and create an activity on pipedrive on deal associated to the user.
+* *Start Sync Producer* is an HTTP route under the hood a producer is running which push messages to Gist-Sync-Consumer.
+* *Pipedrive Producer* is a non HTTP producer which is triggered by the gist sync consumer.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
@@ -59,6 +66,10 @@ Using the Github API query a user’s publicly available GitHub gists and create
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
+### Assumption
+
+* To process gist for a user, we don't have a definite numbers of gist a user can own. So i used consumer producer concept.
+
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
@@ -67,6 +78,7 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
+* Please generate Github Personal Access token and Pipedrive access respectively and place it in [.env.development](.env.development)
 
 ### Installation
 

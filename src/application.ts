@@ -1,6 +1,7 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
 import {CronComponent} from '@loopback/cron';
+import {HealthBindings, HealthComponent} from '@loopback/health';
 import {MetricsBindings, MetricsComponent} from '@loopback/metrics';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
@@ -19,7 +20,6 @@ import {
 } from 'loopback-rabbitmq';
 import path from 'path';
 import {CustomComponent} from './custom-components';
-import {MongodbDataSource} from './datasources';
 import {MySequence} from './sequence';
 import {CronService} from './services';
 
@@ -42,20 +42,6 @@ export class GistGrapperApplication extends BootMixin(
       path: '/explorer',
     });
     this.component(RestExplorerComponent);
-
-    this.dataSource(
-      new MongodbDataSource({
-        name: 'mongodb',
-        connector: 'mongodb',
-        url: process.env.DB_URL,
-        database: process.env.DB_NAME,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        useNewUrlParser: true,
-      }),
-    );
 
     this.configure<RabbitmqComponentConfig>(RabbitmqBindings.COMPONENT).to({
       options: {
@@ -107,6 +93,12 @@ export class GistGrapperApplication extends BootMixin(
     this.component(CronComponent);
     const jobBinding = createBindingFromClass(CronService);
     this.add(jobBinding);
+    this.component(HealthComponent);
+    this.configure(HealthBindings.COMPONENT).to({
+      healthPath: '/health',
+      livePath: '/live',
+      readyPath: '/ready',
+    });
 
     this.configure(MetricsBindings.COMPONENT).to({
       endpoint: {

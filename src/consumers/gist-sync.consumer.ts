@@ -63,7 +63,7 @@ export class GistSyncConsumer {
       }
     } catch (e) {
       console.error(e);
-      await this.gistProducer.fetchGist(message); // retry if fails
+      // await this.gistProducer.fetchGist(message); // retry if fails
     }
   }
 }

@@ -3,7 +3,7 @@ name: Deploy to Amazon ECS
 on:
   workflow_run:
     workflows: ["CI build"]
-    branches: [update-readme]
+    branches: [main]
     types:
       - completed
 
@@ -60,4 +60,4 @@ jobs:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: false
+          wait-for-service-stability: true

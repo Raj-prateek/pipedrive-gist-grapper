@@ -87,7 +87,6 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
-* Please generate Github Personal Access token and Pipedrive access respectively and place it in [.env.development](.env.development)
 
 ### Installation
 
@@ -95,7 +94,8 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/prateek-raj/pipedrive-gist-grapper
    ```
-2. Run command to install the dependencies and packages.
+2. Please generate Github Personal Access token and Pipedrive access respectively and place it in [.env.development](.env.development)
+3. Run command to install the dependencies and packages.
    ```sh
    make init-dev
    ```

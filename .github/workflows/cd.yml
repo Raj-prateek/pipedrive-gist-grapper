@@ -41,8 +41,24 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
+          AMQ_HOST: ${{ secrets.AMQ_HOST }}
+          RABBITMQ_VHOST: ${{ secrets.RABBITMQ_VHOST }}
+          AMQP_USERNAME: ${{ secrets.AMQP_USERNAME }}
+          AMQP_PASSWORD: ${{ secrets.AMQP_PASSWORD }}
+          MONGO_PRODUCTION: ${{ secrets.MONGO_PRODUCTION }}
+          GIT_ACCESS_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
+          PIPEDRIVE_ACCESSTOKEN: ${{ secrets.PIPEDRIVE_ACCESSTOKEN }}
         run: |
-          docker build --build-arg RABBITMQ_VHOST=${{ secrets.RABBITMQ_VHOST }} --build-arg RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }} --build-arg AMQP_USERNAME=${{ secrets.AMQP_USERNAME }} --build-arg AMQP_PASSWORD=${{ secrets.AMQP_PASSWORD }} --build-arg MONGO_PRODUCTION=${{ secrets.MONGO_PRODUCTION }} --build-arg GITHUB_TOKEN=${{ secrets.GIT_ACCESS_TOKEN }} --build-arg PIPEDRIVE_TOKEN=${{ secrets.PIPEDRIVE_ACCESSTOKEN }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            --build-arg RABBITMQ_HOST="$AMQ_HOST" \
+            --build-arg RABBITMQ_VHOST="$RABBITMQ_VHOST" \
+            --build-arg AMQP_USERNAME="$AMQP_USERNAME" \
+            --build-arg AMQP_PASSWORD="$AMQP_PASSWORD" \
+            --build-arg MONGO_PRODUCTION="$MONGO_PRODUCTION" \
+            --build-arg GITHUB_TOKEN="$GIT_ACCESS_TOKEN" \
+            --build-arg PIPEDRIVE_TOKEN="$PIPEDRIVE_ACCESSTOKEN" \
+            --no-cache .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 

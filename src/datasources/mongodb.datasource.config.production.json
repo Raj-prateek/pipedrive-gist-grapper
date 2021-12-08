@@ -1,0 +1,5 @@
+{
+  "name": "mongodb",
+  "connector": "mongodb",
+  "useNewUrlParser": true
+}

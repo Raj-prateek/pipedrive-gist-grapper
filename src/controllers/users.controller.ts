@@ -84,8 +84,6 @@ export class UsersController {
   })
   async startSyncById(@param.path.string('id') id: string) {
     const user = await this.usersRepository.findById(id);
-    user.lastSyncedAt = new Date().toString();
-    await this.usersRepository.save(user);
     await this.gistProducer.fetchGist({
       userName: user.userName,
       date: new Date(),

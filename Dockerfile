@@ -1,28 +1,33 @@
-# Check out https://hub.docker.com/_/node to select a new base image
-FROM node:10-slim
+FROM node:14-buster-slim
 
-# Set to a non-root built-in user `node`
 USER node
 
-# Create app directory (with user `node`)
+ARG GITHUB_TOKEN=production
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
+ARG PIPEDRIVE_TOKEN=production
+ENV PIPEDRIVE_TOKEN=${PIPEDRIVE_TOKEN}
+ARG MONGO_PRODUCTION=production
+ENV MONGO_PRODUCTION=${MONGO_PRODUCTION}
+ARG AMQP_PASSWORD=production
+ENV RABBITMQ_PASSWORD=${AMQP_PASSWORD}
+ARG AMQP_USERNAME=production
+ENV RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
+ARG RABBITMQ_VHOST=production
+ENV RABBITMQ_VHOST=${RABBITMQ_VHOST}
+ARG RABBITMQ_HOST=production
+ENV RABBITMQ_HOST=${RABBITMQ_HOST}
+
 RUN mkdir -p /home/node/app
-
 WORKDIR /home/node/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY --chown=node package*.json ./
 
-RUN npm install
+RUN npm ci
 
-# Bundle app source code
 COPY --chown=node . .
 
-RUN npm run build
-
-# Bind to all network interfaces so that it can be mapped to the host OS
-ENV HOST=0.0.0.0 PORT=3000
-
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3000
 EXPOSE ${PORT}
-CMD [ "node", "." ]
+
+CMD npm run start

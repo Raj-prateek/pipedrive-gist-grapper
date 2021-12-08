@@ -1,9 +1,10 @@
-name: Node.js CI
+name: CI build
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   ci:
+    name: Continuous Integration
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
@@ -15,9 +16,5 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install package
-      run: npm ci
-    - name: Lint Check
-      run: npm run lint
-    - name: Run Test Case
-      run: npm run test
+    - name: Install package | Lint Check | Test Case
+      run: make ci

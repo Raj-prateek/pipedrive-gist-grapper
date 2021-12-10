@@ -20,6 +20,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#infra-platforms">Infra Platforms</a></li>
+        <li><a href="#monitoring">Monitoring</a></li>
         <li><a href="#flow-diagram">Flow diagram</a></li>
       </ul>
     </li>
@@ -46,8 +47,6 @@
 
 Using the Github API query a user’s publicly available GitHub gists and create a deal/activity in Pipedrive for each gist. Implemented a cron job that periodically checks for a user's publicly available gists, this application also has a web endpoint which provide the gists for that user that were added since the last visit.
 
-![Product](assets/images/consumer-flow.png)
-
 ### Services
 * *Gist-Sync-Consumer* collects the gist from the github using gist api.
 * *Pipedrive-Consumer* save it's logs in db and create an activity on pipedrive on deal associated to the user.
@@ -68,6 +67,13 @@ Using the Github API query a user’s publicly available GitHub gists and create
 * Docker
 * Mongodb
 * CloudAMQP
+
+### Monitoring
+
+![[Grafana Dashboard](https://prateekraj1.grafana.net/goto/vjT73Lh7z?orgId=1)](assets/images/grafana.png)
+
+### Flow diagram
+![Product](assets/images/consumer-flow.png)
 
 <!-- GETTING STARTED -->
 ## Getting Started

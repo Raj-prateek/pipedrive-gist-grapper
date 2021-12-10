@@ -108,10 +108,9 @@ export class GistGrapperApplication extends BootMixin(
         timeout: 5000,
       },
       defaultLabels: {
-        service: 'api',
+        service: 'gist-grapper',
         version: '1.0.0',
       },
-      openApiSpec: true,
     });
     this.component(MetricsComponent);
 

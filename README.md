@@ -20,7 +20,6 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#infra-platforms">Infra Platforms</a></li>
-        <li><a href="#monitoring">Monitoring</a></li>
         <li><a href="#flow-diagram">Flow diagram</a></li>
       </ul>
     </li>
@@ -36,6 +35,7 @@
     <li><a href="#Fix-code-style-and-formatting-issues">Fix code style and formatting issues</a></li>
     <li><a href="#others-useful-commands">Other useful commands</a></li>
     <li><a href="#tests">Tests</a></li>
+    <li><a href="#monitoring">Monitoring</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -55,6 +55,11 @@ Using the Github API query a user’s publicly available GitHub gists and create
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Flow diagram
+![Product](assets/images/consumer-flow.png)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### Built With
 
 * [Loopback 4](https://loopback.io/doc/en/lb4/)
@@ -68,12 +73,7 @@ Using the Github API query a user’s publicly available GitHub gists and create
 * Mongodb
 * CloudAMQP
 
-### Monitoring
-
-![[Grafana Dashboard](https://prateekraj1.grafana.net/goto/vjT73Lh7z?orgId=1)](assets/images/grafana.png)
-
-### Flow diagram
-![Product](assets/images/consumer-flow.png)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -169,6 +169,12 @@ npm run lint:fix
 ```sh
 npm test
 ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Monitoring
+
+[![Grafana Dashboard](assets/images/grafana.png)](https://prateekraj1.grafana.net/goto/vjT73Lh7z?orgId=1)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

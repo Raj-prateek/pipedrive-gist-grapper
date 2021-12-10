@@ -35,6 +35,7 @@
     <li><a href="#Fix-code-style-and-formatting-issues">Fix code style and formatting issues</a></li>
     <li><a href="#others-useful-commands">Other useful commands</a></li>
     <li><a href="#tests">Tests</a></li>
+    <li><a href="#monitoring">Monitoring</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -46,13 +47,16 @@
 
 Using the Github API query a user’s publicly available GitHub gists and create a deal/activity in Pipedrive for each gist. Implemented a cron job that periodically checks for a user's publicly available gists, this application also has a web endpoint which provide the gists for that user that were added since the last visit.
 
-![Product](assets/images/consumer-flow.png)
-
 ### Services
 * *Gist-Sync-Consumer* collects the gist from the github using gist api.
 * *Pipedrive-Consumer* save it's logs in db and create an activity on pipedrive on deal associated to the user.
 * *Start Sync Producer* is an HTTP route under the hood a producer is running which push messages to Gist-Sync-Consumer.
 * *Pipedrive Producer* is a non HTTP producer which is triggered by the gist sync consumer.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Flow diagram
+![Product](assets/images/consumer-flow.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -68,6 +72,8 @@ Using the Github API query a user’s publicly available GitHub gists and create
 * Docker
 * Mongodb
 * CloudAMQP
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -163,6 +169,12 @@ npm run lint:fix
 ```sh
 npm test
 ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Monitoring
+
+[![Grafana Dashboard](assets/images/grafana.png)](https://prateekraj1.grafana.net/goto/vjT73Lh7z?orgId=1)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

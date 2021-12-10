@@ -17,6 +17,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#data-model">Data Model</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#infra-platforms">Infra Platforms</a></li>
@@ -46,6 +47,8 @@
 ## About The Project
 
 Using the Github API query a user’s publicly available GitHub gists and create a deal/activity in Pipedrive for each gist. Implemented a cron job that periodically checks for a user's publicly available gists, this application also has a web endpoint which provide the gists for that user that were added since the last visit.
+
+### [Data Model](https://docs.google.com/spreadsheets/d/181pDqHXlrfleKRIAsfCa8Q9klc_CqpK7dyAMR_D9tHE/edit?usp=sharing)
 
 ### Services
 * *Gist-Sync-Consumer* collects the gist from the github using gist api.
